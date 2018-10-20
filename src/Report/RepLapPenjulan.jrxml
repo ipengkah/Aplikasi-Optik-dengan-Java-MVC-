@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="842" pageHeight="1190" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<parameter name="tgl_awal" class="java.lang.String"/>
+	<parameter name="tgl_akhir" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     kwitansi.`no_kwitansi` AS kwitansi_no_kwitansi,
+     nota.`no_nota` AS nota_no_nota,
+     nota.`total_harga` AS nota_total_harga,
+     nota.`no_resep` AS nota_no_resep,
+     resep.`no_resep` AS resep_no_resep,
+     pelanggan.`kd_pelanggan` AS pelanggan_kd_pelanggan,
+     frame.`kd_frame` AS frame_kd_frame,
+     frame.`nm_frame` AS frame_nm_frame,
+     lensa.`kd_lensa` AS lensa_kd_lensa,
+     lensa.`nm_lensa` AS lensa_nm_lensa,
+     isipenjualanframe.`no_nota` AS isipenjualanframe_no_nota,
+     isipenjualanframe.`kd_frame` AS isipenjualanframe_kd_frame,
+     isipenjualanframe.`qty` AS isipenjualanframe_qty,
+     isipenjualanframe.`hrg_frame` AS isipenjualanframe_hrg_frame,
+     isipenjualanlensa.`no_nota` AS isipenjualanlensa_no_nota,
+     isipenjualanlensa.`kd_lensa` AS isipenjualanlensa_kd_lensa,
+     isipenjualanlensa.`qty` AS isipenjualanlensa_qty,
+     kwitansi.`no_nota` AS kwitansi_no_nota,
+     pelanggan.`nm_pelanggan` AS pelanggan_nm_pelanggan,
+     resep.`kd_pelanggan` AS resep_kd_pelanggan,
+     nota.`tgl_nota` AS nota_tgl_nota,
+     isipenjualanlensa.`hrg_lensa` AS isipenjualanlensa_hrg_lensa
+FROM
+     `kwitansi` kwitansi INNER JOIN `nota` nota ON kwitansi.`no_nota` = nota.`no_nota`
+     INNER JOIN `resep` resep ON nota.`no_resep` = resep.`no_resep`
+     INNER JOIN `isipenjualanlensa` isipenjualanlensa ON nota.`no_nota` = isipenjualanlensa.`no_nota`
+     INNER JOIN `isipenjualanframe` isipenjualanframe ON nota.`no_nota` = isipenjualanframe.`no_nota`
+     INNER JOIN `frame` frame ON isipenjualanframe.`kd_frame` = frame.`kd_frame`
+     INNER JOIN `lensa` lensa ON isipenjualanlensa.`kd_lensa` = lensa.`kd_lensa`
+     INNER JOIN `pelanggan` pelanggan ON resep.`kd_pelanggan` = pelanggan.`kd_pelanggan`
+and nota.`tgl_nota` >=$P{tgl_awal}
+and nota.`tgl_nota` <=$P{tgl_akhir}
+ORDER BY 
+nota.`no_nota`]]>
+	</queryString>
+	<field name="kwitansi_no_kwitansi" class="java.lang.String"/>
+	<field name="nota_no_nota" class="java.lang.String"/>
+	<field name="nota_total_harga" class="java.lang.Double"/>
+	<field name="nota_no_resep" class="java.lang.String"/>
+	<field name="resep_no_resep" class="java.lang.String"/>
+	<field name="pelanggan_kd_pelanggan" class="java.lang.String"/>
+	<field name="frame_kd_frame" class="java.lang.String"/>
+	<field name="frame_nm_frame" class="java.lang.String"/>
+	<field name="lensa_kd_lensa" class="java.lang.String"/>
+	<field name="lensa_nm_lensa" class="java.lang.String"/>
+	<field name="isipenjualanframe_no_nota" class="java.lang.String"/>
+	<field name="isipenjualanframe_kd_frame" class="java.lang.String"/>
+	<field name="isipenjualanframe_qty" class="java.lang.Integer"/>
+	<field name="isipenjualanframe_hrg_frame" class="java.lang.Integer"/>
+	<field name="isipenjualanlensa_no_nota" class="java.lang.String"/>
+	<field name="isipenjualanlensa_kd_lensa" class="java.lang.String"/>
+	<field name="isipenjualanlensa_qty" class="java.lang.Integer"/>
+	<field name="kwitansi_no_nota" class="java.lang.String"/>
+	<field name="pelanggan_nm_pelanggan" class="java.lang.String"/>
+	<field name="resep_kd_pelanggan" class="java.lang.String"/>
+	<field name="nota_tgl_nota" class="java.sql.Date"/>
+	<field name="isipenjualanlensa_hrg_lensa" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="70" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="245" height="52"/>
+				<imageExpression class="java.lang.String"><![CDATA["C:\\Users\\sandy\\Desktop\\img-710224347-0001.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement style="Title" x="281" y="37" width="232" height="33"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16"/>
+				</textElement>
+				<text><![CDATA[Laporan Penjualan]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="0" y="55" width="80" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Periode:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="80" y="55" width="70" height="15"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{tgl_awal}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="149" y="55" width="23" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[s/d]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="183" y="55" width="62" height="15"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{tgl_akhir}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="36" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="35" width="802" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="0" y="20" width="80" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[no nota]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="79" y="19" width="71" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[no kwitansi]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="149" y="19" width="73" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[no resep]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="221" y="19" width="83" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Pelanggan]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="304" y="19" width="79" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[nama frame]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="383" y="20" width="50" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[qty]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="432" y="19" width="84" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[harga frame]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="515" y="20" width="83" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[nama lensa]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="598" y="20" width="50" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[qty]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="648" y="19" width="77" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[harga lensa]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="725" y="19" width="77" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[total harga]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="15" width="802" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement style="Detail" x="0" y="1" width="80" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{nota_no_nota}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="79" y="0" width="71" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{kwitansi_no_kwitansi}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="149" y="0" width="73" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{nota_no_resep}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="221" y="0" width="83" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{pelanggan_nm_pelanggan}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="304" y="0" width="79" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{frame_nm_frame}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="383" y="1" width="50" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{isipenjualanframe_qty}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="432" y="0" width="84" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{isipenjualanframe_hrg_frame}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="515" y="1" width="83" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{lensa_nm_lensa}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="598" y="1" width="50" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{isipenjualanlensa_qty}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="648" y="0" width="77" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{isipenjualanlensa_hrg_lensa}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="725" y="0" width="77" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{nota_total_harga}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement style="Column header" x="684" y="0" width="80" height="20"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Halaman "+$V{PAGE_NUMBER}+" dari"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement style="Column header" x="764" y="0" width="40" height="20"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy HH.mm.ss">
+				<reportElement style="Column header" x="0" y="0" width="197" height="20"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

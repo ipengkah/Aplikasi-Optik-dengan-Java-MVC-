@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="tgl_awal" class="java.lang.String"/>
+	<parameter name="tgl_akhir" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT * 
+From nota
+where
+tgl_nota >=$P{tgl_awal}
+and tgl_nota <=$P{tgl_akhir}
+Order By 
+tgl_nota]]>
+	</queryString>
+	<field name="no_nota" class="java.lang.String"/>
+	<field name="tgl_nota" class="java.sql.Date"/>
+	<field name="total_harga" class="java.lang.Double"/>
+	<field name="dp" class="java.lang.Double"/>
+	<field name="sisa_pembayaran" class="java.lang.Double"/>
+	<field name="no_resep" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="178" y="42" width="186" height="37"/>
+				<textElement>
+					<font size="20"/>
+				</textElement>
+				<text><![CDATA[Laporan Pemesanan]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="80" y="0" width="71" height="35"/>
+				<textElement>
+					<font size="20"/>
+				</textElement>
+				<text><![CDATA[no nota]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="151" y="0" width="71" height="35"/>
+				<textElement>
+					<font size="20"/>
+				</textElement>
+				<text><![CDATA[tgl nota]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="293" y="0" width="71" height="35"/>
+				<textElement>
+					<font size="20"/>
+				</textElement>
+				<text><![CDATA[DP]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="222" y="0" width="71" height="35"/>
+				<textElement>
+					<font size="20"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="364" y="0" width="62" height="35"/>
+				<textElement>
+					<font size="20"/>
+				</textElement>
+				<text><![CDATA[Sisa]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="35" splitType="Stretch">
+			<textField>
+				<reportElement x="80" y="0" width="71" height="35"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{no_nota}]]></textFieldExpression>
+			</textField>
+			<textField pattern="yyyy/MM/dd">
+				<reportElement x="151" y="0" width="71" height="35"/>
+				<textElement/>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{tgl_nota}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="293" y="0" width="71" height="35"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{dp}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="222" y="0" width="71" height="35"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{total_harga}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="364" y="0" width="62" height="35"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{sisa_pembayaran}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

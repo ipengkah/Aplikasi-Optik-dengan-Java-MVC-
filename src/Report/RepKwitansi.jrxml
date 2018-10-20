@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="no_nota" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     nota.`no_nota` AS nota_no_nota,
+     kwitansi.`no_kwitansi` AS kwitansi_no_kwitansi,
+     kwitansi.`tgl_kwitansi` AS kwitansi_tgl_kwitansi,
+     kwitansi.`dp` AS kwitansi_dp,
+     kwitansi.`sisa_pembayaran` AS kwitansi_sisa_pembayaran,
+     kwitansi.`jml_lunas` AS kwitansi_jml_lunas,
+     kwitansi.`no_nota` AS kwitansi_no_nota
+FROM
+     `kwitansi` kwitansi INNER JOIN `nota` nota ON kwitansi.`no_nota` = nota.`no_nota`
+WHERE
+kwitansi.`no_nota` = $P{no_nota}]]>
+	</queryString>
+	<field name="nota_no_nota" class="java.lang.String"/>
+	<field name="kwitansi_no_kwitansi" class="java.lang.String"/>
+	<field name="kwitansi_tgl_kwitansi" class="java.sql.Date"/>
+	<field name="kwitansi_dp" class="java.lang.Double"/>
+	<field name="kwitansi_sisa_pembayaran" class="java.lang.Double"/>
+	<field name="kwitansi_jml_lunas" class="java.lang.Double"/>
+	<field name="kwitansi_no_nota" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="257" height="79"/>
+				<imageExpression class="java.lang.String"><![CDATA["C:\\Users\\sandy\\Desktop\\img-710224347-0001.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="42" splitType="Stretch">
+			<staticText>
+				<reportElement x="354" y="0" width="100" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[KWITANSI]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="354" y="20" width="100" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{kwitansi_no_kwitansi}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="38" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TGL]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="38" y="0" width="100" height="20"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{kwitansi_tgl_kwitansi}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="303" y="0" width="66" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DP	]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="303" y="20" width="66" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SISA 	]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="303" y="40" width="66" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[LUNAS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="369" y="0" width="23" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RP]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="369" y="20" width="23" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RP]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="369" y="40" width="23" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RP]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="392" y="0" width="100" height="20"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{kwitansi_dp}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="392" y="20" width="100" height="20"/>
+				<textElement verticalAlignment="Top">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{kwitansi_sisa_pembayaran}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="392" y="41" width="100" height="20"/>
+				<textElement>
+					<font size="14" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{kwitansi_jml_lunas}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="92" splitType="Stretch">
+			<staticText>
+				<reportElement x="645" y="72" width="100" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Penjual]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="645" y="0" width="100" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Hormat Kami]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

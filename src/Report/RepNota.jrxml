@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="no_nota" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     a.`tgl_nota` AS a_tgl_nota,
+     a.`no_nota` AS a_no_nota,
+     a.`total_harga` AS a_total_harga,
+     a.`dp` AS a_dp,
+     a.`sisa_pembayaran` AS a_sisa_pembayaran,
+     b.`no_resep` AS b_no_resep,
+     a.`no_resep` AS a_no_resep,
+     b.`tgl_pesan` AS b_tgl_pesan,
+     b.`tgl_ambil` AS b_tgl_ambil,
+     b.`kd_pelanggan` AS b_kd_pelanggan,
+     c.`kd_pelanggan` AS c_kd_pelanggan,
+     c.`nm_pelanggan` AS c_nm_pelanggan,
+     d.`kd_frame` AS d_kd_frame,
+     d.`nm_frame` AS d_nm_frame,
+     f.`no_nota` AS f_no_nota,
+     f.`kd_frame` AS f_kd_frame,
+     f.`qty` AS f_qty,
+     f.`hrg_frame` AS f_hrg_frame,
+     e.`kd_lensa` AS e_kd_lensa,
+     e.`nm_lensa` AS e_nm_lensa,
+     e.`hrg_jual_lensa` AS e_hrg_jual_lensa,
+     e.`hrg_beli_satuan` AS e_hrg_beli_satuan,
+     e.`stok_lensa` AS e_stok_lensa,
+     g.`no_nota` AS g_no_nota,
+     g.`kd_lensa` AS g_kd_lensa,
+     g.`qty` AS g_qty,
+     g.`hrg_lensa` AS g_hrg_lensa
+FROM
+     `nota` a INNER JOIN `resep` b ON a.`no_resep` = b.`no_resep`
+     INNER JOIN `pelanggan` c ON b.`kd_pelanggan` = c.`kd_pelanggan`
+     INNER JOIN `isipenjualanframe` f ON a.`no_nota` = f.`no_nota`
+     INNER JOIN `isipenjualanlensa` g ON a.`no_nota` = g.`no_nota`
+     INNER JOIN `lensa` e ON g.`kd_lensa` = e.`kd_lensa`
+     INNER JOIN `frame` d ON f.`kd_frame` = d.`kd_frame`
+WHERE 
+a.`no_nota`=$P{no_nota}
+ORDER BY
+     tgl_nota ASC]]>
+	</queryString>
+	<field name="a_tgl_nota" class="java.sql.Date"/>
+	<field name="a_no_nota" class="java.lang.String"/>
+	<field name="a_total_harga" class="java.lang.Double"/>
+	<field name="a_dp" class="java.lang.Double"/>
+	<field name="a_sisa_pembayaran" class="java.lang.Double"/>
+	<field name="b_no_resep" class="java.lang.String"/>
+	<field name="a_no_resep" class="java.lang.String"/>
+	<field name="b_tgl_pesan" class="java.lang.String"/>
+	<field name="b_tgl_ambil" class="java.lang.String"/>
+	<field name="b_kd_pelanggan" class="java.lang.String"/>
+	<field name="c_kd_pelanggan" class="java.lang.String"/>
+	<field name="c_nm_pelanggan" class="java.lang.String"/>
+	<field name="d_kd_frame" class="java.lang.String"/>
+	<field name="d_nm_frame" class="java.lang.String"/>
+	<field name="f_no_nota" class="java.lang.String"/>
+	<field name="f_kd_frame" class="java.lang.String"/>
+	<field name="f_qty" class="java.lang.Integer"/>
+	<field name="f_hrg_frame" class="java.lang.Integer"/>
+	<field name="e_kd_lensa" class="java.lang.String"/>
+	<field name="e_nm_lensa" class="java.lang.String"/>
+	<field name="e_hrg_jual_lensa" class="java.lang.Integer"/>
+	<field name="e_hrg_beli_satuan" class="java.lang.Integer"/>
+	<field name="e_stok_lensa" class="java.lang.Integer"/>
+	<field name="g_no_nota" class="java.lang.String"/>
+	<field name="g_kd_lensa" class="java.lang.String"/>
+	<field name="g_qty" class="java.lang.Integer"/>
+	<field name="g_hrg_lensa" class="java.lang.Integer"/>
+	<variable name="Totalframe" class="java.lang.Integer">
+		<variableExpression><![CDATA[$F{f_qty}*$F{f_hrg_frame}]]></variableExpression>
+	</variable>
+	<variable name="TotalLensa" class="java.lang.Integer">
+		<variableExpression><![CDATA[$F{g_qty}*$F{g_hrg_lensa}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="196" height="79"/>
+				<imageExpression class="java.lang.String"><![CDATA["C:\\Users\\sandy\\Desktop\\img-710224347-0001.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="109" splitType="Stretch">
+			<staticText>
+				<reportElement x="227" y="0" width="100" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOTA]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="227" y="20" width="100" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="14"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{a_no_nota}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="40" width="24" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="16"/>
+				</textElement>
+				<text><![CDATA[Tgl ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="24" y="40" width="100" height="20"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{a_tgl_nota}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="347" y="40" width="61" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="16"/>
+				</textElement>
+				<text><![CDATA[NAMA]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="419" y="40" width="136" height="20"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{c_nm_pelanggan}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="419" y="60" width="136" height="20"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{b_tgl_pesan}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="419" y="80" width="136" height="20"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{b_tgl_ambil}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="347" y="60" width="61" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<text><![CDATA[TGL Ambil]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="347" y="80" width="61" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<text><![CDATA[TGL Pesan]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="25" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="24" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="16"/>
+				</textElement>
+				<text><![CDATA[No]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="24" y="0" width="100" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="16"/>
+				</textElement>
+				<text><![CDATA[Nama Frame]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="124" y="0" width="56" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="16"/>
+				</textElement>
+				<text><![CDATA[Harga]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="180" y="0" width="36" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<text><![CDATA[QTY]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="216" y="0" width="56" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="16"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="404" y="0" width="56" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="16"/>
+				</textElement>
+				<text><![CDATA[Harga]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="460" y="0" width="39" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<text><![CDATA[QTY]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="280" y="0" width="24" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="16"/>
+				</textElement>
+				<text><![CDATA[No]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="304" y="0" width="100" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="16"/>
+				</textElement>
+				<text><![CDATA[Nama Lensa]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="499" y="0" width="56" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="16"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="24" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="24" y="0" width="100" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{d_nm_frame}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="127" y="0" width="53" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{f_hrg_frame}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="0" width="36" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{f_qty}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="280" y="0" width="24" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="308" y="0" width="96" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{e_nm_lensa}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="408" y="0" width="52" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{g_hrg_lensa}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="460" y="0" width="39" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{g_qty}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="216" y="0" width="56" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{Totalframe}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="499" y="0" width="56" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{TotalLensa}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="66" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="16"/>
+				</textElement>
+				<text><![CDATA[Grand Total]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="20" width="100" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="16"/>
+				</textElement>
+				<text><![CDATA[DP]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="40" width="100" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="16"/>
+				</textElement>
+				<text><![CDATA[Sisa]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="100" y="40" width="100" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{a_sisa_pembayaran}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="0" width="100" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{a_total_harga}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="20" width="100" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{a_dp}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="96" splitType="Stretch">
+			<staticText>
+				<reportElement x="408" y="0" width="100" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="16"/>
+				</textElement>
+				<text><![CDATA[Hormat Kami]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="408" y="76" width="100" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="16"/>
+				</textElement>
+				<text><![CDATA[Penjual]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
